@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ApiUsers")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("ApiMessages")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8813ca17b3e576078a7e50d22853181daab9cd23")]
-[assembly: System.Reflection.AssemblyProductAttribute("ApiUsers")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ApiUsers")]
+[assembly: System.Reflection.AssemblyProductAttribute("ApiMessages")]
+[assembly: System.Reflection.AssemblyTitleAttribute("ApiMessages")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Создано классом WriteCodeFragment MSBuild.

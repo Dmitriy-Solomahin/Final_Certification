@@ -1,4 +1,5 @@
 ﻿using ApiUsers.Abstraction;
+using ApiUsers.DB;
 using ApiUsers.Models;
 
 namespace ApiUsers.Repo
