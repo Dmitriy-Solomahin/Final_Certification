@@ -1,0 +1,8 @@
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.csproj.AssemblyReference.cache
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.AssemblyInfoInputs.cache
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.AssemblyInfo.cs
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.sourcelink.json
+C:\Users\ASUS\Study$\С#\C# pro\basics\ApiUsers\obj\Debug\net8.0\ApiUsers.MvcApplicationPartsAssemblyInfo.cs
