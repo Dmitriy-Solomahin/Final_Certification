@@ -3,7 +3,9 @@ using ApiUsers.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ApiUsers.Controllers
@@ -21,7 +23,7 @@ namespace ApiUsers.Controllers
 
         [AllowAnonymous]
         [HttpPost("add_user")]
-        public IActionResult Login([FromBody] UserDTO userDTO)
+        public IActionResult Login([FromBody] LoginModel userDTO)
         {
             var entityUser = _userRepository.AddUser(userDTO);
 
@@ -34,6 +36,8 @@ namespace ApiUsers.Controllers
         }
 
         [HttpGet("get_users")]
+        [Route("Users")]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult GetUsers() { 
             var users = _userRepository.GetUsers();
             return Ok(users);
@@ -43,17 +47,19 @@ namespace ApiUsers.Controllers
         [HttpDelete("delete_user")]
         [Route("Admins")]
         [Authorize(Roles = "Admin")]
-        public IActionResult DeleteUser([FromBody] UserName user)
+        public IActionResult DeleteUser(string user)
         {
             var result = _userRepository.DeleteUser(user);
             return Ok(result);
         }
 
 
-        private string GenerateToken(User user)
+        private string GenerateToken(UserDTO user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(key, SecurityAlgoritms.HmacSha256);
+            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var key = new RsaSecurityKey(RSATools.GetPrivateKey());
+
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature);
 
             var claim = new[]
             {
@@ -65,7 +71,7 @@ namespace ApiUsers.Controllers
                 claim,
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials);
-            return JwtSecurityTokenHandler().WriteToken(token);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

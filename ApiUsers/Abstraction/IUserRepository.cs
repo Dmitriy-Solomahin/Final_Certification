@@ -4,8 +4,8 @@ namespace ApiUsers.Abstraction
 {
     public interface IUserRepository
     {
-        public User AddUser(UserDTO user);
-        public IEnumerable<UserName> GetUsers();
-        public int DeleteUser(UserName user);
+        public UserDTO AddUser(LoginModel user);
+        public IEnumerable<string> GetUsers();
+        public int DeleteUser(string user);
     }
 }

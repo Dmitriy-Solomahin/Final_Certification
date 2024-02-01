@@ -1,14 +1,18 @@
 using ApiUsers.Abstraction;
+using ApiUsers.DB;
 using ApiUsers.Repo;
+using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ApiUsers
 {
     public class Program
     {
+        
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +20,9 @@ namespace ApiUsers
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+
             builder.Services.AddSwaggerGen(opt =>
             {
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -43,8 +50,6 @@ namespace ApiUsers
                 });
             });
 
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
                 {
                     opt.TokenValidationParameters = new TokenValidationParameters
@@ -55,17 +60,29 @@ namespace ApiUsers
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience = builder.Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+
+                        IssuerSigningKey = new RsaSecurityKey(RSATools.GetPublicKey())
                     };
             });
+            builder.Services.AddDbContext<UserContext>();
+            //builder.Host.ConfigureContainer<ContainerBuilder>(cb => cb.Register(c => new UserContext()));
 
 
             var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapControllers();
 
             app.Run();
         }
