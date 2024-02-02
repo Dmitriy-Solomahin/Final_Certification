@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "vu/p7QEBTSt+AeQKgvya7ydzghUXshzSMLlHxHKL/QA=",
+  "Hash": "hTXS15qupikSL2CpBjMYYKFOUzgENkzTYJ9o72pMXP8=",
   "Source": "ApiMessages",
   "BasePath": "_content/ApiMessages",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\ASUS\\Study$\\С#\\C# pro\\FinalCertification\\ApiUsers\\ApiUsers.csproj",
+      "Version": 2,
+      "Source": "ApiUsers",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

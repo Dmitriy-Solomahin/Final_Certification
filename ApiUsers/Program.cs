@@ -1,13 +1,10 @@
 using ApiUsers.Abstraction;
-using ApiUsers.DB;
 using ApiUsers.Repo;
-using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Security.Cryptography;
-using System.Text;
-
+using WebApiLibr;
+using WebApiLibr.rsa;
 namespace ApiUsers
 {
     public class Program
@@ -65,7 +62,9 @@ namespace ApiUsers
                         IssuerSigningKey = new RsaSecurityKey(RSATools.GetPublicKey())
                     };
             });
-            builder.Services.AddDbContext<UserContext>();
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.AddDbContext<AppDbContext>();
             //builder.Host.ConfigureContainer<ContainerBuilder>(cb => cb.Register(c => new UserContext()));
 
 

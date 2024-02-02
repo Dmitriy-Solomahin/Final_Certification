@@ -1,17 +1,21 @@
 ﻿using ApiUsers.Abstraction;
-using ApiUsers.DB;
-using ApiUsers.Models;
+using AutoMapper;
 using System.Security.Cryptography;
 using System.Text;
+using WebApiLibr;
+using WebApiLibr.Models.DTO;
+using WebApiLibr.Models.EntitiesModel;
 
 namespace ApiUsers.Repo
 {
     public class UserRepository : IUserRepository
     {
-        private readonly UserContext _context;
-        public UserRepository(UserContext context)
+        private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
+        public UserRepository(AppDbContext context, IMapper mapper)
         {
             _context = context;
+           _mapper = mapper;
         }
 
 
@@ -25,18 +29,20 @@ namespace ApiUsers.Repo
                     byte[] salt = new byte[16];
                     new Random().NextBytes(salt);
 
-                    var data = Encoding.ASCII.GetBytes(user.Password).Concat(salt).ToArray();
+                    var data = Encoding.ASCII.GetBytes(user.Password);
+                    //var data = Encoding.ASCII.GetBytes(user.Password).Concat(salt).ToArray();
 
                     SHA512 shaM = new SHA512Managed();
 
-                    if (_context.Users.Count() == 0)
+                    if (_context.Users.Count(x => x.RoleId == Roles.Admin) == 0)
                     {
                         entityUser = new User
                         {
                             Email = user.Email,
                             Password = shaM.ComputeHash(data),
                             Salt = salt,
-                            RoleId = Roles.Admin
+                            RoleId = Roles.Admin,
+                            Role = new Role() { RoleId = Roles.Admin, RoleName = Roles.Admin.ToString()}
                             
                         };
                     }
@@ -47,7 +53,8 @@ namespace ApiUsers.Repo
                             Email = user.Email,
                             Password = shaM.ComputeHash(data),
                             Salt = salt,
-                            RoleId = Roles.User
+                            RoleId = Roles.User,
+                            Role = new Role() { RoleId = Roles.User, RoleName = Roles.User.ToString() }
                         };
                     }
                     _context.Users.Add(entityUser);
@@ -55,28 +62,41 @@ namespace ApiUsers.Repo
                 }
                 else
                 {
-                    var data = Encoding.ASCII.GetBytes(user.Password).Concat(entityUser.Salt).ToArray();
+                    var data = Encoding.ASCII.GetBytes(user.Password);
+                    //var data = Encoding.ASCII.GetBytes(user.Password).Concat(entityUser.Salt).ToArray();
 
                     SHA512 shaM = new SHA512Managed();
-                    if (entityUser.Password != shaM.ComputeHash(data))
+                    var pas = shaM.ComputeHash(data);
+                    if (!entityUser.Password.SequenceEqual(pas))
                         return null;
                 }
-                //maper
-                var result = new UserDTO() { Email = entityUser.Email, Password = entityUser.Password.ToString(), Role = entityUser.RoleId };
-                return result;
+                var dto = _mapper.Map<UserDTO>(entityUser);
+                return dto;
 
             }
             
         }
 
-        public int DeleteUser(string user)
+        public Guid DeleteUser(string userEmail)
         {
-            throw new NotImplementedException();
+            using (_context)
+            {
+                var entityProduct = _context.Users.FirstOrDefault(x => x.Email.Equals(userEmail));
+                if (entityProduct != null)
+                {
+                    _context.Users.Remove(entityProduct);
+                    _context.SaveChanges();
+                }
+                return entityProduct.Id;
+            }
         }
-
-        public IEnumerable<string> GetUsers()
+        public IEnumerable<UserDTO> GetUsers()
         {
-            throw new NotImplementedException();
+            using (_context)
+            {
+                var listUsers = _context.Users.Select(x => _mapper.Map<UserDTO>(x)).ToList();
+                return listUsers;
+            }
         }
     }
 }

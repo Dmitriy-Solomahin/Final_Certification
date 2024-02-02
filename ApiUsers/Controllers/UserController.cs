@@ -1,15 +1,16 @@
 ﻿using ApiUsers.Abstraction;
-using ApiUsers.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
+using WebApiLibr.Models.DTO;
+using WebApiLibr.rsa;
 
 namespace ApiUsers.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -22,7 +23,7 @@ namespace ApiUsers.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("add_user")]
+        [HttpPost("add_user_or_login")]
         public IActionResult Login([FromBody] LoginModel userDTO)
         {
             var entityUser = _userRepository.AddUser(userDTO);
@@ -35,17 +36,18 @@ namespace ApiUsers.Controllers
             return NotFound("Пользователь с данным логином использует другой пароль)");
         }
 
-        [HttpGet("get_users")]
-        [Route("Users")]
+        [HttpGet]
+        [Route("get_users")]
         [Authorize(Roles = "Admin, User")]
-        public IActionResult GetUsers() { 
+        public IActionResult GetUsers()
+        {
             var users = _userRepository.GetUsers();
             return Ok(users);
         }
 
-        
-        [HttpDelete("delete_user")]
-        [Route("Admins")]
+
+        [HttpDelete]
+        [Route("delete_users_to_admin")]
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteUser(string user)
         {

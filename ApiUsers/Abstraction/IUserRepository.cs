@@ -1,11 +1,11 @@
-﻿using ApiUsers.Models;
+﻿using WebApiLibr.Models.DTO;
 
 namespace ApiUsers.Abstraction
 {
     public interface IUserRepository
     {
         public UserDTO AddUser(LoginModel user);
-        public IEnumerable<string> GetUsers();
-        public int DeleteUser(string user);
+        public IEnumerable<UserDTO> GetUsers();
+        public Guid DeleteUser(string user);
     }
 }

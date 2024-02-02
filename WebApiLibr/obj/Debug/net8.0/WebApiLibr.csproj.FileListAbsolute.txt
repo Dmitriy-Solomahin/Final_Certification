@@ -1,0 +1,15 @@
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\bin\Debug\net8.0\WebApiLibr.deps.json
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\bin\Debug\net8.0\WebApiLibr.dll
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\bin\Debug\net8.0\WebApiLibr.pdb
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.csproj.AssemblyReference.cache
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.AssemblyInfoInputs.cache
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.AssemblyInfo.cs
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.sourcelink.json
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.dll
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\refint\WebApiLibr.dll
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.pdb
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\ref\WebApiLibr.dll
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\bin\Debug\net8.0\WebApiLibr.runtimeconfig.json
+C:\Users\ASUS\Study$\С#\C# pro\FinalCertification\WebApiLibr\obj\Debug\net8.0\WebApiLibr.genruntimeconfig.cache
